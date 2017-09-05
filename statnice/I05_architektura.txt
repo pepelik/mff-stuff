@@ -11,3 +11,128 @@ Architektury počítače. Procesory, multiprocesory.
  Systémy souborů, adresářové struktury. 
 
 --- Moc dlouhé otázky : check PDF pro zadání ---
+
+=============
+= 2017 léto =
+=============
+dlouhé zadání zkrácená verze viz fórum
+
+=============
+= 2017 jaro =
+=============
+6. Vlákna
+     Předpokládejte nějaký běžný operační systém jako Linux nebo Windows běžící na procesorech s architekturou x86.
+     1. Vysvětlete, co to je vlákno, a co je součástí jeho kontextu.
+     2. Jaké jsou důležité stavy, ve kterých se vlákno může v takovém OS nacházet ? Pro každý uvedený stav vysvětlete, co
+     znamená, a dále vysvětlete, jak se vlákno do takového stavu dostane (například voláním jakého syscallu jádra).
+     3. Předpokládejte, že bychom chtěli v jazyce jako Pascal, C, nebo C++ naimplementovat v běžné aplikaci běžící v uživatel-
+     ském režimu vlastní koncept kooperativně přepínaných vláken, tedy v kontextu jednoho preemptivně přepínaného vlákna
+     operačního systému bychom umožnili běh různých našich kooperativně přepínaných vláken. Jak by rámcově v takovém
+     jazyce vypadala implementace procedury Yield, která by měla procesor odebrat volajícímu vláknu a přepnout kontext na
+     nové vlákno identifikované thread ID předaným jako parametr této procedury ?
+     Není třeba psát přesný program, stačí v přibližném zápisu kódu uvést, jaké hlavní kroky je třeba v proceduře Yield provést.
+     Pokud byste potřebovali použít assembler cílového procesoru, stačí podobně načrtnout potřebné instrukce v hrubých rysech.
+
+=============
+= 2016 jaro =
+=============
+3. Procesory
+    1. Jaké základní typy instrukcí musí procesor podporovat ? Ke každému typu instrukce uveďte příklad a vysvětlete, co
+    instrukce dělá (názvy instrukcí nejsou podstatné, ale nějaké vhodné uveďte).
+    2. Minimálně jaké registry (názvy nejsou podstatné, ale nějaké vhodné uveďte) je možné v procesoru najít, a jakou má každý
+    z nich funkci ?
+    3. Jakým způsobem bude ve strojovém kódu procesoru zapsána následující konstrukce z vyššího programovacího jazyka ?
+    Zapište v assembleru dle konvence zvolené v otázce výše (všechny použité proměnné jsou globální a jejich adresy si libovolně
+    vhodně zvolte):
+    if (a + b == 0) a = b; else b = a;
+
+4. Architektura počítače
+    1. Jaké základní signální vodiče bude mít nějaká paralelní systémová sběrnice se sběrnicovou topologií (bus/multidrop) a
+    s podporou pro jednoho mastera (stačí bez podpory burst přenosů) ? Popište základní množinu kontrolních/řídících signálů,
+    které bude muset taková sběrnice mít. Také jistě bude potřeba několik „rozmnožených“ signálů pro samotný paralelní přenos
+    informací - kolik takových signálních vodičů bude použito v nějaké realistické situaci, a jak bude jejich počet ovlivňovat
+    rychlost či jiné vlastnosti sběrnice ?
+    Není nutné popsat přesně nějakou konkrétní reálnou sběrnici, ale bude jistě vhodné, pokud se inspirujete nějakou reálnou
+    paralelní sběrnicí jako ISA nebo PCI. Také nejde o přesné pojmenování signálů ale o jejich význam.
+    2. Předpokládejte, že na takové systémové sběrnici bude připojena současně operační paměť počítače (pomocí řadiče paměti)
+    a několik řadičů zařízení. Jakým způsobem bude probíhat komunikace procesoru s pamětí a jakým se zařízeními ? Bude
+    mezi těmito dvěma variantami komunikace na sběrnici nějaký rozdíl ?
+    Na příkladu jednoduchého řadiče pevných disků ukažte, jakým způsobem bude probíhat základní operace zápisu jednoho
+    sektoru, tedy jaký zhruba bude základní komunikační protokol řadiče pro tuto situaci a jaké transakce na sběrnici asi
+    v souvislosti s přenosem proběhnou od momentu, kdy si ovladač disku bude chtít po řadiči vyžádat začátek přenosu až do
+    jeho dokončení.
+    3. Bylo by možné jako systémovou sběrnici použít sběrnici sériovou ? Pokud ano, tak popište a vysvětlete, jak bude principiálně
+    na takové sběrnici vypadat transakce čtení z paměťového adresového prostoru mezi nějakým masterem a slavem, a jaké
+    informace bude potřeba přenést. Pokud ne, tak detailně vysvětlete, proč to není možné.
+
+=============
+= 2016 léto =
+=============
+14. Procesy a vlákna
+    1. Pro typický operační systém jako Linux nebo Windows vysvětlete, jaký je rozdíl mezi konceptem procesu a vlákna. Co je
+    součástí stavu procesu a co je součástí stavu vlákna ?
+    Předpokládejte, že na příkazové řádce v Unixovém operačním systému (případně běžné příkazové řádce operačního systému
+    Windows) zadáte následující složený příkaz, kde ls je výpis adresáře, head -N je výběr prvních N řádků (na Windows by
+    příkazy mohly být převzaty například z prostředí Cygwin):
+    ls | head -3 > out.txt
+    2. Kolik procesů v dané situaci vznikne a kdo je spustí ?
+    3. Jakým způsobem se příkaz head dozví, že má vybrané 3 řádky zapsat zrovna do souboru out.txt ? Kdo a jakým způsobem
+    příkazu head tuto informaci předá ?
+    4. Jak je zařízeno, že příkaz head může číst seznam souborů vygenerovaný příkazem ls ? Je z pohledu příkazu ls tato situace
+    stejná jako při zadání níže uvedeného příkazu ? Vysvětlete.
+    ls > out.txt
+
+18. Systémy souborů
+    1. Na nějakém běžném souborovém systému jsme vytvořili soubor /A.TXT a zapsali do něj jedno písmeno A v kódování
+    ASCII. Ve výpisu adresáře je u souboru poznamenáno, že má „velikost“ 1 byte. Při zobrazení detailnějších informací o
+    souboru se nám ale zobrazuje, že „velikost souboru na disku“ je 8192 bytů. Vysvětlete, jaký je rozdíl mezi těmito dvěma
+    informacemi, a proč je druhé číslo tak velké.
+    2. Pokud bychom do uvedeného souboru připsali navíc další písmeno B opět v kódování ASCII, jaká bude nejspíš „velikost“
+    a jaká „velikost souboru na disku“ pro daný soubor ?
+    3. Na nějakém běžném souborovém systému (FAT, běžný souborový systém unixového typu, nebo NTFS) vysvětlete, jakým
+    způsobem a kde jsou zhruba uloženy informace o obsahu adresářů (tedy jaké soubory a podadresáře obsahuje nějaký
+    konkrétní adresář).
+    4. Předpokládejte, že používáme nějaký vhodný souborový systém na operačním systému Linux nebo Windows (tedy nějaký
+    souborový systém moderního unixového typu na Linuxu nebo souborový systém NTFS na Windows). Vysvětlete, jak na
+    takovém systému docílit toho, aby pro soubor /A/B/C/D mohl být obsah adresářů A a B na jiném (fyzickém) disku než
+    obsah adresáře C a souboru D. Důležité pro nás je, aby běžné aplikace o tomto rozdělení mezi různé disky nemusely vědět.
+
+===============
+= 2016 podzim =
+===============
+2. Architektura počítače
+    1. Co nejefektivněji rozhodněte, která z následujících čísel jsou dělitelná 8. Stručně napište, jak jste postupovali.
+    (a) 0xF13C1C50
+    (b) 0x013C81C5
+    (c) 0x125928FD
+    (d) 0x5318C5E8
+    (e) 0x831D79FF
+    2. Předpokládejte, že máme dva zcela rozdílné postupy, tak spočítat nějakou stejnou cílovou hodnotu. V prvním řešení je
+    výrazně nejčastěji prováděn následující řádek kódu:
+    a = b / 99;
+    Ve druhém řešení je opět výrazně nejčastěji, a to zhruba stejně často jako v předchozím, prováděn řádek:
+    a = b / 4;
+    V obou řešeních jsou proměnné a, b celočíselné bezznaménkové, operátor / je celočíselné dělení.
+    Pokud se kód nakonec překládá do strojového kódu nějakého běžného procesoru nějakým typickým překladačem daného
+    jazyka, tak rozhodněte, které řešení bude asi stran výkonosti lepší. Vysvětlete proč.
+    3. Předpokládejte, že máme N bitové celé nezáporné číslo A, a M bitové celé nezáporné číslo B, kde N < 16 , M < 16. Víme,
+    že číslo A je uložené v N spodních bitech proměnné iA, a číslo B je uložené v M spodních bitech proměnné iB. Obsah
+    ostatních bitů proměnných iA a iB je neznámý. Dále máme v programu proměnné N a M, které určují rozsah A a B.
+    Vaším úkolem je v jazyce C#, nebo C++, nebo Java napsat kód, který nastaví obsah proměnné oC tak, že v nejnižších N
+    bitech je uložena hodnota A, v následujích M bitech (od N. bitu) je uložena hodnota B, zbývající (nejvyšší) bity proměnné
+    oC mají být nulové. Všechny proměnné iA, iB, N, M, oC jsou 32-bitové.
+
+9. Organizace paměti
+    1. Je typická paměť RAM (SRAM nebo DRAM) „random access“ (tedy přístup na libovolnou adresu je prakticky stejně
+    rychlý), a je typická paměť ROM „read-only“ (tedy obsah nelze měnit) ? Jaký je hlavní rozdíl mezi dnes běžnou pamětí
+    typu RAM (SRAM nebo DRAM) a pamětí typu ROM (například EEPROM) ? Vysvětlete.
+    2. Běžný desktopový počítač má operační paměť typu DRAM. Jak procesor takového počítače ví, jaký kód má po zapnutí
+    napájení počítače provádět ? Kde takový kód vezme ?
+    3. Vysvětlete, co to je boot loader a co rámcově provádí jeho kód. Kde procesor tento kód vezme a jak ví, že ho má provádět ?
+
+(následující možná patří do okruhu programovacích jazyků, ale to je buřt)
+12. Rozhraní pro synchronizaci
+1. Napište rozhraní zámku (mutex) jako objektu pro synchronizaci. Popište sémantiku metod.
+2. Načrtněte možnou implementaci zámku z předchozího bodu (stačí minimální funkční řešení).
+3. Napište rozhraní podmínkové proměnné (condition variable) jako objektu pro synchronizaci. Popište sémantiku metod.
+4. Vysvětlete, proč některé metody rozhraní podmínkové proměnné akceptují zámek jako parametr.
